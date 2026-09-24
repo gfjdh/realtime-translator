@@ -7,9 +7,6 @@
 抓帧(按窗口) → 画面变化检测 → RapidOCR → 文本稳定判定 → 翻译 → 置顶悬浮窗
 ```
 
-**抓的是窗口，不是屏幕。** 默认用 Windows Graphics Capture 按窗口句柄抓，游戏
-被别的窗口盖住、或者不在前台，都照样能抓到它自己的内容 —— 不需要先把游戏切前台，
-也不需要担心抓到的其实是浏览器。
 
 ---
 
@@ -48,8 +45,7 @@ Fantasy Maiden Wars - Dream of the Stray Dreamer -  [fmw_dosd.exe]
 `-w` 既可以给标题的一部分，**也可以直接给 exe 名**，两者都试：
 
 ```bat
-main.py -w "Fantasy Maiden"
-main.py -w fmw_dosd              rem 同一个游戏，用 exe 名一样能匹配
+main.py -w name              rem 同一个游戏，用 exe 名一样能匹配
 ```
 
 用 exe 名通常更省事——窗口标题会带一堆后缀、会变，有时甚至是空的。
@@ -162,8 +158,6 @@ wgc 拿到的是窗口的**可见边框**（DWM 的 extended frame bounds），�
 ---
 
 ## 已知限制
-
-这些是实测确认的，不是猜测：
 
 **1. 独占全屏（Exclusive Fullscreen）抓不到。**
 独占全屏时桌面合成被绕过，三条抓帧路径都拿不到画面。请在游戏里把显示模式改成
