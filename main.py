@@ -74,6 +74,8 @@ def build_parser() -> argparse.ArgumentParser:
                    help="开启文本方向分类（游戏横排文字不需要，开了更慢）")
     p.add_argument("--source-lang", dest="source_lang", help="源语言，默认 en")
     p.add_argument("--target-lang", dest="target_lang", help="目标语言，默认 zh-CN")
+    p.add_argument("--mt-email", dest="mt_email",
+                   help="MyMemory 的邮箱，填了日额度从 5000 字符提到 50000（官方不需要验证）")
     p.add_argument("--show-source", action="store_true", default=None, dest="show_source",
                    help="在译文上方显示英文原文")
     p.add_argument("--no-show-source", action="store_false", dest="show_source")
@@ -300,8 +302,11 @@ def _do_once(capture: WindowCapture, cfg: Config) -> int:
         return 1
     print(f"\n识别到（{ocr.last_elapse * 1000:.0f}ms）：\n{text}\n")
     translator = Translator(
-        cfg.source_lang, cfg.target_lang, cache_path=CACHE_PATH if cfg.use_cache else None
+        cfg.source_lang, cfg.target_lang,
+        cache_path=CACHE_PATH if cfg.use_cache else None,
+        email=cfg.mt_email,
     )
+    print(f"翻译端点（按优先级）: {' → '.join(translator.provider_names)}")
     try:
         out, cached = translator.translate(text)
     except TranslateError as e:
@@ -416,7 +421,9 @@ def _run_gui(capture: WindowCapture, cfg: Config, warning: Optional[str] = None)
         return 1
 
     translator = Translator(
-        cfg.source_lang, cfg.target_lang, cache_path=CACHE_PATH if cfg.use_cache else None
+        cfg.source_lang, cfg.target_lang,
+        cache_path=CACHE_PATH if cfg.use_cache else None,
+        email=cfg.mt_email,
     )
     print(f"翻译端点（按优先级）: {' → '.join(translator.provider_names)}")
 

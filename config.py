@@ -28,6 +28,9 @@ class Config:
     alpha: float = 0.92
     source_lang: str = "en"
     target_lang: str = "zh-CN"
+    # MyMemory 的 de 参数。官方文档明说不需要注册或验证，填了额度从
+    # 5000 字符/天提到 50000。留空就走匿名额度
+    mt_email: str = ""
     show_source: bool = True
     font_size: int = 11
     width: int = 560
