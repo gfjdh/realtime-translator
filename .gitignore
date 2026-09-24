@@ -1,0 +1,13 @@
+# 虚拟环境（setup.bat 生成）
+.venv/
+__pycache__/
+*.py[cod]
+
+# 运行时产物
+cache/
+config.json
+
+# 验证脚本的中间产物。脚本本身要提交，生成的图/日志不提交
+.scratch/*.png
+.scratch/*.log
+.scratch/whl/

@@ -1,0 +1,13 @@
+# 首选抓帧：Windows Graphics Capture，按窗口句柄抓窗口自己的内容。
+# 窗口被遮挡、不在前台都照样能抓到（abI3 wheel，约 230KB，无额外依赖）
+windows-capture>=2.0.0
+# 次选抓帧：Desktop Duplication API（dxgi 后端），走 GPU 侧，CPU 占用远低于 GDI 截屏
+dxcam>=0.3.0
+# 兜底抓帧：GDI BitBlt，前两个都拿不到画面时用（约 50KB）
+mss>=9.0.0
+# OCR：PP-OCRv6，wheel 里自带 det/rec/cls 三个 onnx 模型，首次运行不需要联网下模型
+rapidocr>=3.0.0
+# rapidocr 3.x 把推理引擎从依赖里拆了出去，必须单独装，否则 import 就报错
+onnxruntime>=1.20.0
+numpy>=1.24
+Pillow>=10.0
